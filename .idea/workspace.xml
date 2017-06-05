@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4087e771-b54c-4784-b4f8-eb7b9c1b5f55" name="Default" comment="Removed ./idea folder">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="4087e771-b54c-4784-b4f8-eb7b9c1b5f55" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="eth-tax-report.iws" />
@@ -280,7 +279,7 @@
       <workItem from="1496350153983" duration="7945000" />
       <workItem from="1496670465487" duration="12384000" />
       <workItem from="1496683946022" duration="997000" />
-      <workItem from="1496688875713" duration="106000" />
+      <workItem from="1496688875713" duration="124000" />
     </task>
     <task id="LOCAL-00001" summary="Removed ./idea folder">
       <created>1496684006187</created>
@@ -310,11 +309,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496688955414</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Removed ./idea folder">
+      <created>1496688990325</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1496688990325</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21432000" />
+    <option name="totallyTimeSpent" value="21450000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1033" extended-state="6" />
