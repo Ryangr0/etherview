@@ -1,0 +1,15 @@
+{
+  "name": "eth-tax-report",
+  "version": "1.0.0",
+  "description": "Generates tax report by url to transactions",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Grippeling",
+  "license": "MIT"
+}

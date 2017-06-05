@@ -1,0 +1,17 @@
+{
+  "name": "eth-tax-report",
+  "description": "Generates tax report by url to transactions",
+  "main": "index.js",
+  "authors": [
+    "Ryan Grippeling"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
