@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="bower_components/nprogress/nprogress.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -16,26 +17,45 @@
     <script src="bower_components/tableExportJquery/jspdf/jspdf.js"></script>
     <script src="bower_components/tableExportJquery/tableExport.js"></script>
     <script src="bower_components/tableExportJquery/jquery.base64.js"></script>
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 </head>
     <div class="container-fluid">
         <div class="row hidden-print">
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <h3>Inputs</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="miner-source">Source</label>
-                        <select id="miner-source" disabled="disabled" class="form-control">
-                            <option value="0" selected="selected">No sources loaded yet...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="miner-address">Address</label>
-                        <input type="text" class="form-control" id="miner-address" placeholder="Address" value="0x10f216b20b1d358749b8305caed6cf771f9e987a">
-                    </div>
-                </form>
+
+                <div class="col-md-3">
+                    <form>
+                        <div class="form-group">
+                            <label for="miner-source">Source</label>
+                            <select id="miner-source" disabled="disabled" class="form-control">
+                                <option value="0" selected="selected">No sources loaded yet...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="miner-address">Address</label>
+                            <input type="text" class="form-control" id="miner-address" placeholder="Address" value="0x10f216b20b1d358749b8305caed6cf771f9e987a">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="form-group">
+                            <label for="datepicker-from">From</label>
+                            <input type="text" class="form-control datepicker datepicker-from" id="datepicker-from" placeholder="mm/dd/yyyy">
+                        </div>
+                        <div class="form-group">
+                            <label for="datepicker-to">Until</label>
+                            <input type="text" class="form-control datepicker datepicker-to" id="datepicker-to" placeholder="mm/dd/yyyy" data-date-end-date="0d">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
                 <button id="miner_url_button" class="btn btn-default">Create table</button>
                 <button id="export-to-csv-button" class="btn btn-default">Export to csv</button>
-
             </div>
         </div>
         <div class="row">

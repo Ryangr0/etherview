@@ -49,11 +49,22 @@ function alignDates(transactions)
     };
 
     xhr.onload = function() {
+        var from_value = $('#datepicker-from').val();
+        var to_value   = $('#datepicker-to').val();
+
+        var from = 0;
+        var to   = moment().utc().startOf('day').format('X');
+
+        if (from_value != '') {
+            from = moment(from_value, 'MM/DD/YYYY').utc().format('X');
+        }
+        if (to_value != '') {
+            to = moment(to_value, 'MM/DD/YYYY').add(1, 'days').utc().format('X');
+        }
+
         daily_price_list = JSON.parse(xhr.responseText).Data;
 
         var today = daily_price_list.slice(-1)[0];
-
-
 
         var data = [];
 
@@ -62,10 +73,21 @@ function alignDates(transactions)
             earnings: 0,
             earnings_if_sold_today: 0
         };
+
         $.each(transactions, function(i, transaction) {
             var transaction_for_data = {};
-
             var timestamp = moment(transaction.timestamp, 'x');
+
+            var utc_unix_timestamp = timestamp.utc().startOf('day').format('X');
+
+            if (utc_unix_timestamp < from) {
+                return true;
+            }
+
+            if (utc_unix_timestamp > to) {
+                return true;
+            }
+
             var daily_price_object = daily_price_list.filter(function( obj ) {
                 return obj.time == timestamp.utc().startOf('day').format('X');
             });

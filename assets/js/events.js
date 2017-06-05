@@ -8,6 +8,8 @@ var sources = [
 $(function() {
     NProgress.start();
 
+    $('.datepicker').datepicker({});
+
     var sources_html = '';
     $.each(sources, function(i, source) {
         sources_html = "<option value='" + source.url + "'>" + source.name + "</option>";
