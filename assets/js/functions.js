@@ -127,5 +127,8 @@ function processTransactions(transactions, today, total)
     Mustache.parse(template);   // optional, speeds up future uses
     var rendered = Mustache.render(template, {'transactions' : transactions, 'today': today, 'total': total});
     $('#tax-table').html(rendered);
+    $('#tax-table>table').DataTable({
+        paging: false
+    });
     spinner.stop();
 }
