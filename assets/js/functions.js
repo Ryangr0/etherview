@@ -21,21 +21,47 @@ function createCORSRequest(method, url) {
 
 function getInfo(url)
 {
-    var xhr = createCORSRequest('GET', url);
-    if (!xhr) {
-        throw new Error('CORS not supported');
+    if (json_object != null) {
+        var normalized_transactions = json_object;
+        switch(selected_source) {
+            case 'Ethermine':
+                normalized_transactions = normalizeTransactions(json_object.payouts);
+        }
+
+        alignDates(normalized_transactions);
+    } else {
+        var xhr = createCORSRequest('GET', url);
+        if (!xhr) {
+            throw new Error('CORS not supported');
+        }
+
+        xhr.onerror = function() {
+            alert('Something went wrong with the request.');
+        };
+
+        xhr.onload = function() {
+            transactions = JSON.parse(xhr.responseText);
+            alignDates(transactions);
+        };
+
+        xhr.send();
+    }
+}
+
+function normalizeTransactions(transactions)
+{
+    var normalized_transactions = false;
+    switch(selected_source) {
+        case 'Ethermine':
+            normalized_transactions = $.map(transactions.reverse(), function(transaction) {
+                return {
+                    amount: (transaction.amount/Math.pow(10, transaction.amount.toString().length-1)),
+                    timestamp: moment(transaction.paidOn, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').utc().format('x')
+                };
+            });
     }
 
-    xhr.onerror = function() {
-        alert('Something went wrong with the request.');
-    };
-
-    xhr.onload = function() {
-        transactions = JSON.parse(xhr.responseText);
-        alignDates(transactions);
-    };
-
-    xhr.send();
+    return normalized_transactions;
 }
 function alignDates(transactions)
 {
@@ -127,6 +153,7 @@ function processTransactions(transactions, today, total)
     Mustache.parse(template);   // optional, speeds up future uses
     var rendered = Mustache.render(template, {'transactions' : transactions, 'today': today, 'total': total});
     $('#tax-table').html(rendered);
+    json_object = null;
     $('#tax-table>table').DataTable({
         paging: false,
         "footerCallback": function ( row, data, start, end, display ) {
@@ -163,4 +190,27 @@ function processTransactions(transactions, today, total)
         }
     });
     spinner.stop();
+}
+
+function getUrl()
+{
+    var address = $('#miner-address').val();
+    var source  = $('#miner-source>option:selected').val();
+
+    // if (address == '') {
+    //     alert('No address entered');
+    //     return false;
+    // }
+
+    if (source == '') {
+        alert('No source entered');
+        return false;
+    }
+
+    return source + address;
+}
+
+function updateUrl()
+{
+    $('#api_url').html('<a href="' + getUrl() + '">' + getUrl() + '</a>');
 }

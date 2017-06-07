@@ -27,6 +27,9 @@
 </head>
     <div class="container-fluid">
         <div class="row hidden-print">
+            <div id="notifications" class="col-md-12"></div>
+        </div>
+        <div class="row hidden-print">
             <div class="col-md-12">
                 <h3>Inputs</h3>
 
@@ -60,8 +63,17 @@
         </div>
         <div class="row">
             <div class="col-md-3">
+                <label class="btn btn-info btn-file">
+                    upload JSON <input type="file" id="json_uploader" name="json_file" style="display:none" />
+                </label>
                 <button id="miner_url_button" class="btn btn-default">Create table</button>
                 <button id="export-to-csv-button" class="btn btn-default">Export to csv</button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                API url: <span id="api_url"></span>
             </div>
         </div>
         <div class="row">
@@ -135,6 +147,31 @@
             </table>
         </script>
     </div>
+    <script>
+        var json_object = null;
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+                var reader = new FileReader();
+
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                        try {
+                            json_object = JSON.parse(e.target.result);
+                        } catch(e) {
+                            alert('File doesn\'t seem to be JSON.');
+                        }
+                    };
+                })(f);
+
+                reader.readAsText(f);
+            }
+        }
+
+        document.getElementById('json_uploader').addEventListener('change', handleFileSelect, false);
+    </script>
     <script src="assets/js/functions.js"></script>
     <script src="assets/js/events.js"></script>
 </body>
