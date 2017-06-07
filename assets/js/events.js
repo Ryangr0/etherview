@@ -6,6 +6,10 @@ var sources = [
     {
         "name": "Ethermine",
         "url": 'http://ethermine.org/api/miner_new/'
+    },
+    {
+        "name": "Etherscan",
+        "url": 'http://api.etherscan.io/api?module=account&action=txlist&startblock=0&endblock=99999999&sort=asc&apikey=UBHK27CI936UBB83ZSRMIV338YYIMTUQKZ&address='
     }
 ];
 

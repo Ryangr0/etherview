@@ -41,6 +41,10 @@ function getInfo(url)
 
         xhr.onload = function() {
             transactions = JSON.parse(xhr.responseText);
+            switch(selected_source) {
+                case 'Etherscan':
+                    transactions = normalizeTransactions(transactions.result);
+            }
             alignDates(transactions);
         };
 
@@ -59,6 +63,15 @@ function normalizeTransactions(transactions)
                     timestamp: moment(transaction.paidOn, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').utc().format('x')
                 };
             });
+            break;
+        case 'Etherscan':
+            normalized_transactions = $.map(transactions, function(transaction) {
+                return {
+                    amount: (transaction.value/Math.pow(10, transaction.value.toString().length-1)),
+                    timestamp: moment(transaction.timeStamp, 'X').utc().format('x')
+                };
+            });
+            break;
     }
 
     return normalized_transactions;
