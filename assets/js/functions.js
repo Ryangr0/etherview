@@ -185,5 +185,5 @@ function getUrl()
 
 function updateUrl()
 {
-    $('#api_url').html('<a href="' + getUrl() + '">' + getUrl() + '</a>');
+    $('#api_url').html('<a href="' + getUrl() + '" target="_blank">' + getUrl() + '</a>');
 }
