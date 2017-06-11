@@ -54,8 +54,16 @@ function normalizeTransactions(transactions)
     switch(selected_source) {
         case 'Ethermine':
             normalized_transactions = $.map(transactions.reverse(), function(transaction) {
+
+                // parse transaction amount into a string of total length 22, with preceding 0's before it starts.
+                var normalized_amount = String("0000000000000000000000" + transaction.amount).slice(-22);
+                // Seperation unit at fourth index of parsed string.
+                normalized_amount     = normalized_amount.slice(0, 4) + "." + normalized_amount.slice(4);
+                // Parse it back to float to be able to calculate properly
+                normalized_amount     = parseFloat(normalized_amount);
+
                 return {
-                    amount: (transaction.amount/Math.pow(10, transaction.amount.toString().length-1)),
+                    amount: normalized_amount,
                     timestamp: moment(transaction.paidOn, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').utc().format('x')
                 };
             });
